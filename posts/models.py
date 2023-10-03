@@ -3,6 +3,7 @@ from taggit.managers import TaggableManager
 from django.contrib.auth.models import User
 # Create your models here.
 '''
+create post :-
 title
 author
 content
@@ -10,7 +11,9 @@ image
 publish_date
 tags
 '''
+
 '''
+model :
 -fields
 -html
 -validation
