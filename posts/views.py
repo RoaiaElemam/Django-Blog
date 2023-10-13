@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from .models import post
+from .form import postform
+
 
 # Create your views here.
 def post_list(request):
@@ -9,3 +11,28 @@ def post_list(request):
 def post_DETAIL(request,post_id):
     data = post.objects.get(id=post_id)    #orm-->sql-->db--->list(all posts)
     return render(request ,'post_detail.html',{'post':data})
+
+#add post
+def add_post(request):
+    if request.method=='POST':
+        form=postform(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form=postform()
+    form=postform()
+    return render(request ,'new.html',{'form':form}) 
+
+#remove post
+def add_post(request):
+    if request.method=='POST':
+        form=postform(request.POST,request.FILES)
+        if form.is_valid():
+            myform=form.save(commit=False)
+            myform.author=request.user
+            myform.save()
+            return redirect('/blog/')
+    else:
+        form=postform()
+    form=postform()
+    return render(request ,'new.html',{'form':form})
