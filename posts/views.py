@@ -20,19 +20,20 @@ def add_post(request):
             form.save()
     else:
         form=postform()
-    form=postform()
+    
     return render(request ,'new.html',{'form':form}) 
 
-#remove post
-def add_post(request):
+#EDIT post
+def edit_post(request,post_id):
+    data = post.objects.get(id=post_id) 
     if request.method=='POST':
-        form=postform(request.POST,request.FILES)
+        form=postform(request.POST,request.FILES,instance=data)
         if form.is_valid():
             myform=form.save(commit=False)
             myform.author=request.user
             myform.save()
             return redirect('/blog/')
     else:
-        form=postform()
-    form=postform()
-    return render(request ,'new.html',{'form':form})
+        form=postform(instance=data)
+    
+    return render(request ,'edit.html',{'form':form})
