@@ -20,7 +20,7 @@ def add_post(request):
             form.save()
     else:
         form=postform()
-    
+    form=postform()
     return render(request ,'new.html',{'form':form}) 
 
 #EDIT post
@@ -35,7 +35,7 @@ def edit_post(request,post_id):
             return redirect('/blog/')
     else:
         form=postform(instance=data)
-    
+    form=postform()
     return render(request ,'edit.html',{'form':form})
 
 #delete post
