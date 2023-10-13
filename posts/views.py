@@ -37,3 +37,9 @@ def edit_post(request,post_id):
         form=postform(instance=data)
     
     return render(request ,'edit.html',{'form':form})
+
+#delete post
+def delete_post(request,post_id):
+    data = post.objects.get(id=post_id)    #orm-->sql-->db--->list(all posts)
+    data.delete()
+    return redirect('/blog/')
